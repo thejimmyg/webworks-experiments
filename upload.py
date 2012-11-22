@@ -5,6 +5,9 @@ import mimetypes
 import sys
 import os
 
+# Get the auth header by sniffing the HTTP headers using a tool like Firefox's LiceHTTPHeaders whilst you sign in.
+AUTH=b''
+
 def encode_multipart_formdata(fields, files):
     """
     fields is a sequence of (name, value) elements for regular form fields.
@@ -58,7 +61,7 @@ def upload(filenames, directory=None):
             'POST',
             '/upload',
             body,
-            {b'Authorization': b'Basic dGhlamltbXlnOmcwSVBIZWVKZQ==', b'Content-Type': content_type},
+            {b'Authorization': b'Basic '+AUTH, b'Content-Type': content_type},
         )
         #print("done.")
         #print("The resposne is:")
